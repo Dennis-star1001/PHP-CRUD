@@ -1,0 +1,162 @@
+body {
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: whitesmoke;
+  
+}
+
+.heading{
+    
+    text-align: center;
+    
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.animal-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+.left{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    /* border: 1px solid black; */
+    box-shadow: 0 2px 5px gray;
+    border-radius: 10px;
+    padding: 20px;
+    gap: 10px;
+}
+.animal-list{
+    display: flex;
+    
+    /* border: 1px solid black; */
+    box-shadow: 0 2px 5px gray;
+    border-radius: 10px;
+    padding: 20px;
+    gap: 10px;
+}
+.input-field{
+    display: flex;
+    flex-direction: column;
+}
+input{
+    height: 30px;
+    border: none;
+
+}
+input:focus{
+    outline: none;
+    border-bottom: 1px solid gray;
+}
+label{
+    font-size: 13px;
+}
+.submit{
+    background-color: rgb(54, 173, 30);
+    border: none;
+    color: white;
+}
+.main_nav{
+display: flex;
+justify-content: space-between;
+}
+.welcome{
+    list-style: none;
+    font-size: 25px;
+}
+.error {
+   
+    width: 100%;
+    background-color: pink;
+    color: red;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+
+   
+}
+
+.success {
+    height: 5%;
+    width: 100%;
+    background-color: lightgreen;
+    color: green;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+}
+p{
+    font-size: 11px;
+    text-align: center;
+}
+.nav-links{
+    display: flex;
+    list-style: none;
+    justify-content: right;
+    padding-right: 10px;
+
+}
+.output a{
+    padding: 5px;
+    margin: 5px 10px;
+    font-size: 15px;
+    text-decoration: none;
+   
+}
+
+.nav-links li a{
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px 10px;
+    font-size: 15px;
+    text-decoration: none;
+    color: white;
+    background-color: green;
+}
+.output-main{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+   
+    align-items: center;
+}
+.output{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+   margin: 10px;
+   width: 80%;
+}
+.del-btn{
+    background-color: gainsboro;
+}
+.row-id{
+    width: 10px;
+    background-color: white;
+    padding: 10px;
+
+
+}
+.row{
+    width: 250px;
+    background-color: white;
+    padding: 10px;
+}
+/* .main-animal{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+} */
