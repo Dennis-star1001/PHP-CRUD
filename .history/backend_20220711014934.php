@@ -5,7 +5,7 @@ require("function.php");
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $password =$_POST['password'];
+    $password = sha1($_POST['password']);
     $phone = $_POST['phone'];
 
     if (empty($username) || empty($email) || empty($password) || empty($phone)) {
@@ -18,14 +18,15 @@ if (isset($_POST['register'])) {
     $Select_sql = "SELECT * FROM register WHERE username = '$username' AND phone = '$phone'";
     $query =  mysqli_query($conn, $Select_sql);
 
-    selectQuery("register", "username = '$username' AND phone = '$phone'");
+selectQuery("register", "username = '$username' AND phone = '$phone'");
 
     if (mysqli_num_rows($query) > 0) {
         errorRedirect("register.php", "This user already exist");
         exit;
+    } else {
+        insertQuery("register", "username = '$username', email='$email', password='$password', phone = '$phone'");
+        successRedirect("login.php", "You can now register");
     }
-    insertQuery("register", "username = '$username', email='$email', password='$password', phone = '$phone'");
-    successRedirect("login.php", "You can now register");
 }
 
 
@@ -43,16 +44,16 @@ if (isset($_POST['login'])) {
     // function selectQuery($table, $field = "*", $conditions = "")
     $Select_sql = "SELECT * FROM register WHERE username = '$username' AND password = '$password'";
     $query =  mysqli_query($conn, $Select_sql);
+   
 
-
-    selectQuery("register", "username = '$username' AND password = '$password'");
+    // selectQuery("register", "username = '$username' AND password = '$password'");
 
 
     if (mysqli_num_rows($query) > 0) {
         $row = mysqli_fetch_array($query);
         $_SESSION['id'] = $row['id'];
         $_SESSION['username'] = $row['username'];
-
+        $_SESSION['password'] = $row['password'];
         successRedirect("dashboard.php", "success=Logged in...");
     } else {
         errorRedirect("login.php", "User not found!");

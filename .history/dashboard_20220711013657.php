@@ -1,11 +1,10 @@
 <?php
 
-require("backend.php");
+require("function.php");
 
 
 if (!isset($_SESSION['username'])) {
     errorRedirect("login.php","Unauthorized user");
-
     exit;
 }
 ?>

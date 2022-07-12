@@ -5,13 +5,14 @@
         if(isset($_GET['id'])) {
             $id = $_GET['id'];
         } else {
-           errorRedirect("dashboard.php", "", "");
+           successRedirect("dashboard.php");
             exit;
         }
         
         $sql = "DELETE FROM animals WHERE id='$id'";
         mysqli_query($conn, $sql);
-        successRedirect("dashboard.php", "success", "Deleted successfully!");
+        
+        header("Location: dashboard.php?success=Deleted successfully!");
         exit;
     
     ?>

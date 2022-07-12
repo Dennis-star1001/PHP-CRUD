@@ -1,11 +1,11 @@
 <?php
-require("function.php");
-
+session_start();
+require("connection.php");
 
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $password =$_POST['password'];
+    $password = sha1($_POST['password']);
     $phone = $_POST['phone'];
 
     if (empty($username) || empty($email) || empty($password) || empty($phone)) {
@@ -14,18 +14,18 @@ if (isset($_POST['register'])) {
     }
 
     //check if existed
-
     $Select_sql = "SELECT * FROM register WHERE username = '$username' AND phone = '$phone'";
-    $query =  mysqli_query($conn, $Select_sql);
 
-    selectQuery("register", "username = '$username' AND phone = '$phone'");
+    $query =  mysqli_query($conn, $Select_sql);
 
     if (mysqli_num_rows($query) > 0) {
         errorRedirect("register.php", "This user already exist");
         exit;
+    } else {
+        $Insert_sql = "INSERT INTO register SET username = '$username', email='$email', password='$password', phone = '$phone'";
+        mysqli_query($conn, $Insert_sql);
+        successRedirect("login.php", "You can now register");
     }
-    insertQuery("register", "username = '$username', email='$email', password='$password', phone = '$phone'");
-    successRedirect("login.php", "You can now register");
 }
 
 
@@ -39,23 +39,19 @@ if (isset($_POST['login'])) {
         errorRedirect("login.php", "Empty field not allowed!");
 
         exit;
+    } else {
     }
-    // function selectQuery($table, $field = "*", $conditions = "")
+
     $Select_sql = "SELECT * FROM register WHERE username = '$username' AND password = '$password'";
-    $query =  mysqli_query($conn, $Select_sql);
-
-
-    selectQuery("register", "username = '$username' AND password = '$password'");
-
-
+    $query = mysqli_query($conn, $Select_sql);
     if (mysqli_num_rows($query) > 0) {
         $row = mysqli_fetch_array($query);
         $_SESSION['id'] = $row['id'];
         $_SESSION['username'] = $row['username'];
-
+        $_SESSION['password'] = $row['password'];
         successRedirect("dashboard.php", "success=Logged in...");
     } else {
-        errorRedirect("login.php", "User not found!");
+        errorRedirect(" register.php", "User not found!");
         exit;
     }
 }
@@ -68,7 +64,8 @@ if (isset($_POST['save'])) {
         errorRedirect("dashboard.php", "Empty field not allowed!");
         exit;
     } else {
-        insertQuery("animals", "Name='$name', Food='$Food', Type='$Type', Habitat='$Habitat'");
+        $Insert_sql = "INSERT INTO animals SET  Name='$name', Food='$Food', Type='$Type', Habitat='$Habitat'";
+        mysqli_query($conn, $Insert_sql);
         successRedirect("dashboard.php", "success=Successfully submited list!");
         exit;
     }
@@ -82,7 +79,8 @@ if (isset($_POST['update'])) {
     $food = $_POST['Food'];
     $habitat = $_POST['Habitat'];
 
-    updateQuery("animals", "Name='$name', Food='$Food', Type='$Type', Habitat='$Habitat' WHERE id = '$id'");
+    $sql = "UPDATE animals SET Name='$name', Food='$Food', Type='$Type', Habitat='$Habitat' WHERE id = '$id'";
+    mysqli_query($conn, $sql);
     successRedirect("dashboard.php", "success=Updated successfully!");
     exit;
 }

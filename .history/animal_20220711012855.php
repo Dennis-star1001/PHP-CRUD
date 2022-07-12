@@ -10,7 +10,7 @@
         $id = $_GET['id'];
     } else {
         header("Location: dashboard.php");
-        redirect("dashboard.php", "", "");
+        redirect("dashboard.php", "success", "ddd");
         exit;
     }
 ?>

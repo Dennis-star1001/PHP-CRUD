@@ -5,7 +5,6 @@ require("backend.php");
 
 if (!isset($_SESSION['username'])) {
     errorRedirect("login.php","Unauthorized user");
-
     exit;
 }
 ?>
